@@ -1,26 +1,22 @@
-{{- if .Values.certManager.enabled }}
+{{- if .Values.certManagerIssuer.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: cert-manager-issuer
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "-70"
+    argocd.argoproj.io/sync-wave: "-60"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: {{ .Values.spec.project }}
   destination:
     server: {{ .Values.spec.destination.server }}
-    namespace: {{ .Values.certManager.namespace }}
+    namespace: {{ .Values.certManagerIssuer.namespace }}
   source:
-    repoURL: {{ .Values.certManager.chart.repoURL }}
-    chart: {{ .Values.certManager.chart.name }}
-    targetRevision: {{ .Values.certManager.chart.version }}
-    helm:
-      valuesObject:
-        crds:
-          enabled: true
+    repoURL: {{ .Values.certManagerIssuer.chart.repoURL }}
+    chart: {{ .Values.certManagerIssuer.chart.name }}
+    targetRevision: {{ .Values.certManagerIssuer.chart.version }}
   syncPolicy:
     automated:
       prune: true

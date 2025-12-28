@@ -24,6 +24,22 @@ trustManager:
     name: trust-manager
     version: v0.13.0
 
+certManagerIssuer:
+  enabled: true
+  namespace: cert-manager
+  chart:
+    repoURL: oci://zot:5000
+    name: cert-manager-issuer
+    version: latest
+
+trustManagerBundle:
+  enabled: true
+  namespace: cert-manager
+  chart:
+    repoURL: oci://zot:5000
+    name: trust-manager-bundle
+    version: latest
+
 traefik:
   enabled: true
   namespace: traefik
