@@ -14,9 +14,8 @@ spec:
     server: {{ .Values.spec.destination.server }}
     namespace: {{ .Values.trustManagerBundle.namespace }}
   source:
-    repoURL: {{ .Values.trustManagerBundle.chart.repoURL }}
-    chart: {{ .Values.trustManagerBundle.chart.name }}
-    targetRevision: {{ .Values.trustManagerBundle.chart.version }}
+    repoURL: {{ .Values.trustManagerBundle.repoURL }}
+    targetRevision: {{ .Values.trustManagerBundle.targetRevision }}
   syncPolicy:
     automated:
       prune: true

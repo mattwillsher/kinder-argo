@@ -14,9 +14,8 @@ spec:
     server: {{ .Values.spec.destination.server }}
     namespace: {{ .Values.certManagerIssuer.namespace }}
   source:
-    repoURL: {{ .Values.certManagerIssuer.chart.repoURL }}
-    chart: {{ .Values.certManagerIssuer.chart.name }}
-    targetRevision: {{ .Values.certManagerIssuer.chart.version }}
+    repoURL: {{ .Values.certManagerIssuer.repoURL }}
+    targetRevision: {{ .Values.certManagerIssuer.targetRevision }}
   syncPolicy:
     automated:
       prune: true
