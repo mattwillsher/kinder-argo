@@ -1,0 +1,40 @@
+{{- if .Values.traefik.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: {{ .Values.spec.project }}
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: {{ .Values.traefik.namespace }}
+  source:
+    repoURL: {{ .Values.traefik.chart.repoURL }}
+    chart: {{ .Values.traefik.chart.name }}
+    targetRevision: {{ .Values.traefik.chart.version }}
+    helm:
+      valuesObject:
+        # Enable Gateway API provider
+        providers:
+          kubernetesGateway:
+            enabled: true
+        # Enable Ingress provider
+        providers:
+          kubernetesIngress:
+            enabled: true
+        # Install Gateway API CRDs
+        gateway:
+          enabled: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+{{- end }}

@@ -1,0 +1,33 @@
+# Common configuration for all applications
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/mattwillsher/kinder-argo.git
+    targetRevision: HEAD
+
+# Per-application overrides
+certManager:
+  enabled: true
+  namespace: cert-manager
+  chart:
+    repoURL: https://charts.jetstack.io
+    name: cert-manager
+    version: v1.16.2
+
+trustManager:
+  enabled: true
+  namespace: cert-manager
+  chart:
+    repoURL: https://charts.jetstack.io
+    name: trust-manager
+    version: v0.13.0
+
+traefik:
+  enabled: true
+  namespace: traefik
+  chart:
+    repoURL: https://traefik.github.io/charts
+    name: traefik
+    version: 33.2.1
